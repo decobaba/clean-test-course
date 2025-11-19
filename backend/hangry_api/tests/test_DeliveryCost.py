@@ -26,10 +26,9 @@ def test_MiddleOfTheRoadItems():
   assert cost == 5
 
 def test_LittleItems():
-  #Arrange
-  # TODO: Arrange the items to run the test
-  #Act
-  # TODO: Call the function that will be tested
-  #Assert
-  # TODO: replace the pass with an assert to test the value returned.
-  pass
+  order = MockSet()
+  order.add(MockModel(quantity=3))
+  order.add(MockModel(quantity=1))
+  del_dist = 2
+  cost = Delivery.calculate(order, del_dist)
+  assert cost == 2.50
