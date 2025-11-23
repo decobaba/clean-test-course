@@ -6,20 +6,7 @@ on:
       - lesson-5
 
 jobs:
-  # function_test: (commented out to save learner time)
-  #   runs-on: ubuntu-latest
-  #   defaults:
-  #     run:
-  #       working-directory: frontend
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - run: npm install
-  #     - name: Run functional tests
-  #       run: npm test -- --coverage --watchAll=false
-
   deploy:
-    # needs: [function_test] (normally you'd not deploy until functional tests were complete)
-    # Add your deploy steps here if needed
     runs-on: ubuntu-latest
     steps:
       - name: Placeholder for deploy
@@ -32,54 +19,11 @@ jobs:
       run:
         working-directory: frontend
     steps:
-      - name: ZAP Scan
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: ZAP Baseline Scan
         uses: zaproxy/action-baseline@v0.9.0
         with:
           target: 'https://hangryhippo.quantic.host'
-    #      - run: npm install && npm run build (commented out to save learner time)
-    #      - name: Generate deployment package
-    #        run: zip -r deploy.zip build Dockerfile
-    #      - name: '**PLACEHOLDER** Deploy to Elastic Beanstalk'
-    #        run: echo Placeholder for Deploymentname: Lesson 5 DAST
-
-on:
-  push:
-    branches:
-      - lesson-5
-
-jobs:
-  # function_test: (commented out to save learner time)
-  #   runs-on: ubuntu-latest
-  #   defaults:
-  #     run:
-  #       working-directory: frontend
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - run: npm install
-  #     - name: Run functional tests
-  #       run: npm test -- --coverage --watchAll=false
-
-  deploy:
-    # needs: [function_test] (normally you'd not deploy until functional tests were complete)
-    # Add your deploy steps here if needed
-    runs-on: ubuntu-latest
-    steps:
-      - name: Placeholder for deploy
-        run: echo "Deploy step here"
-
-  security_test:
-    needs: [deploy]
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: frontend
-    steps:
-      - name: ZAP Scan
-        uses: zaproxy/action-baseline@v0.9.0
-        with:
-          target: 'https://hangryhippo.quantic.host'
-    #      - run: npm install && npm run build (commented out to save learner time)
-    #      - name: Generate deployment package
-    #        run: zip -r deploy.zip build Dockerfile
-    #      - name: '**PLACEHOLDER** Deploy to Elastic Beanstalk'
-    #        run: echo Placeholder for Deployment
+          # You can add more ZAP options here if neede
